@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell Your Strength Equipment — GetStryk</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rent.css">
+  <link rel="stylesheet" href="sell.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
+        STRYK
+        <img src="images/stryksymbol.png" class="logo-symbol" alt="Stryk Symbol">
+      </div>
+
+      <nav class="nav">
+        <a href="sell.html" class="nav-sell">Sell Your Equipment</a>
+        <span class="nav-divider">|</span>
+        <a href="index.html#equipment">Equipment</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#delivery">Delivery</a>
+        <span class="nav-divider">|</span>
+        <a href="rent.html?package=pro" class="nav-cta">Order Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" style="background-image:url('images/getstryk-hero-bg-2.jpg');">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Sell Your Strength Equipment.</h1>
+      <p class="subhead">
+        We collect it. We inspect it. You get paid fast — without the hassle of marketplaces.
+      </p>
+      <a href="#sell-form" class="cta">Get Your Offer</a>
+    </div>
+  </section>
+
+  <!-- VALUE SECTION -->
+  <section class="value">
+    <div class="container value-grid sell-value-grid">
+
+      <div class="value-item">
+        <img src="images/free-collection.png" class="value-icon">
+        <h3>Free Collection</h3>
+        <p>We collect your equipment directly from your home — no heavy lifting required.</p>
+      </div>
+
+      <div class="value-item">
+        <img src="images/fast-payment.png" class="value-icon">
+        <h3>Fast Payment</h3>
+        <p>Once inspected, you get paid quickly via bank transfer.</p>
+      </div>
+
+      <div class="value-item">
+        <img src="images/hassle-free.png" class="value-icon">
+        <h3>No Marketplace Hassle</h3>
+        <p>No time-wasters, no tyre-kickers, no endless messages — just a clean sale.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SELL FORM -->
+  <section id="sell-form" class="rent-page">
+    <div class="container">
+
+      <!-- NETLIFY FORM -->
+      <form name="sell-form" method="POST" data-netlify="true" id="sellForm">
+        <input type="hidden" name="form-name" value="sell-form">
+
+        <div class="rent-card">
+          <div class="rent-card-header">
+            <h2>What Are You Selling?</h2>
+            <span class="step-number" style="opacity:0;">•</span>
+          </div>
+
+          <p class="rent-intro">
+            Select all the items you want to sell. You can send photos later via WhatsApp.
+          </p>
+
+          <!-- EQUIPMENT GRID -->
+          <div class="sell-equipment-grid">
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Adjustable Bench" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Adjustable Bench
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Squat Rack / Half Rack" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Squat Rack / Half Rack
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Olympic Barbell" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Olympic Barbell
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Weight Plates" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Weight Plates
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Dumbbells" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Dumbbells
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Kettlebells" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Kettlebells
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Full Strength Setup" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Full Strength Setup
+            </label>
+
+            <label class="sell-item">
+              <input type="checkbox" name="equipment[]" value="Other" hidden>
+              <span class="material-symbols-outlined sell-check">check_box_outline_blank</span>
+              Other
+            </label>
+
+          </div>
+
+          <!-- NOTES -->
+          <div class="rent-field">
+            <label>Additional Notes (optional)</label>
+            <input type="text" id="sellNotes" name="notes" placeholder="Anything we should know?">
+          </div>
+
+          <!-- LOCATION -->
+          <div class="rent-field">
+            <label>Your Postcode</label>
+            <input type="text" id="sellPostcode" name="postcode" placeholder="e.g. LS18">
+          </div>
+
+          <!-- CONTACT DETAILS -->
+          <div class="rent-field">
+            <label>Your Name</label>
+            <input type="text" id="sellName" name="name">
+          </div>
+
+          <div class="rent-field">
+            <label>Your Email</label>
+            <input type="email" id="sellEmail" name="email">
+          </div>
+
+          <div class="rent-field">
+            <label>Your Phone (optional)</label>
+            <input type="text" id="sellPhone" name="phone">
+          </div>
+
+          <!-- CTA -->
+          <button class="rent-checkout-btn" id="sellSubmitBtn">
+            Get Your Offer
+          </button>
+
+          <!-- SUCCESS + WHATSAPP -->
+          <p id="sellSuccess" class="sell-success">
+            Thanks — we’ve received your details. We’ll be in touch shortly with your offer.
+          </p>
+
+          <div id="sellWhatsApp" class="sell-whatsapp">
+            <a 
+              href="https://wa.me/447858772084?text=Hi%20GetStryk,%20here%20are%20the%20photos%20of%20my%20equipment." 
+              class="cta whatsapp-cta"
+            >
+              Send Photos via WhatsApp
+            </a>
+
+            <p class="sms-note">
+              Prefer SMS? Text your photos to <strong>07858 772084</strong>.
+            </p>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-col">
+        <p class="footer-title">GetStryk</p>
+        <p class="footer-line">
+          <span class="material-symbols-outlined footer-icon">location_on</span>
+          Leeds, UK
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-title">Support</p>
+        <p class="footer-line">
+          <span class="material-symbols-outlined footer-icon">mail</span>
+          <a href="mailto:hello@getstryk.co.uk">hello@getstryk.co.uk</a>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-title">Legal</p>
+        <p>© 2026 GetStryk</p>
+        <p>All rights reserved</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="sell.js"></script>
+
+</body>
+</html>

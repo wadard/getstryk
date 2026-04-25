@@ -1,0 +1,74 @@
+/* Center value grid for 3 items */
+.sell-value-grid {
+  grid-template-columns: repeat(3, 1fr) !important;
+  justify-items: center;
+}
+
+/* Equipment grid */
+.sell-equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sell-item {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  padding: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: 0.25s ease;
+  font-size: 16px;
+}
+
+.sell-item:hover {
+  border-color: var(--color-accent);
+}
+
+.sell-item.selected {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.3);
+}
+
+/* Checkbox icons */
+.sell-check {
+  font-size: 32px;
+  color: var(--color-border);
+  transition: 0.25s ease;
+}
+
+.sell-item.selected .sell-check {
+  color: var(--color-accent);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
+}
+
+/* Success + WhatsApp */
+.sell-success {
+  color: var(--color-accent);
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  display: none;
+}
+
+.sell-whatsapp {
+  display: none;
+  margin-top: 16px;
+  text-align: center;
+}
+
+.whatsapp-cta {
+  padding: 12px 24px;
+  font-size: 16px;
+  display: inline-block;
+}
+
+.sms-note {
+  color: var(--color-text-muted);
+  margin-top: 8px;
+  font-size: 14px;
+}

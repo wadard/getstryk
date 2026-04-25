@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review & Confirm — GetStryk</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="rent.css">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+
+    <!-- MATERIAL SYMBOLS -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
+                STRYK
+                <img src="images/stryksymbol.png" class="logo-symbol" alt="Stryk Symbol">
+            </div>
+
+            <nav class="nav">
+                <a href="sell.html" class="nav-sell">Sell Your Equipment</a>
+                <span class="nav-divider">|</span>
+                <a href="index.html#equipment">Equipment</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#delivery">Delivery</a>
+                <span class="nav-divider">|</span>
+                <a href="rent.html?package=pro" class="nav-cta">Order Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="rent-page">
+        <div class="container">
+
+            <div class="rent-card" style="margin-top:40px;">
+
+                <!-- BACK LINK (correct placement + hover) -->
+                <p class="go-back-link" onclick="window.location.href='rent.html#step5'">
+                    ← Back to details
+                </p>
+
+                <div class="rent-card-header">
+                    <h2>Review your rental</h2>
+                </div>
+
+                <p class="rent-intro">
+                    You’ll pay for your first month today. Your next monthly payment will be charged exactly one month
+                    from today.
+                </p>
+
+                <!-- SUMMARY -->
+                <div id="confirmSummary" class="summary-box"></div>
+
+                <!-- PAYMENT CTA -->
+                <button id="paymentButton" class="rent-checkout-btn">
+                    Proceed to secure payment
+                </button>
+
+                <!-- TERMS NOTE (subtle, grey, left-aligned) -->
+                <p class="terms-note">
+                    You agreed to the GetStryk Terms &amp; Conditions and rental responsibilities on the previous step.
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-inner">
+            <p>© 2026 GetStryk</p>
+            <a href="terms.html">Terms & Conditions</a>
+        </div>
+    </footer>
+
+    <script>
+        /* -------------------------------------------------- */
+        /* LOAD DATA FROM LOCALSTORAGE */
+        /* -------------------------------------------------- */
+
+        const data = JSON.parse(localStorage.getItem("rentalData") || "{}");
+        const summaryEl = document.getElementById("confirmSummary");
+        const paymentButton = document.getElementById("paymentButton");
+
+        function getMonthlyPrice(pkg) {
+            if (pkg === "starter") return 35;
+            if (pkg === "pro") return 45;
+            if (pkg === "elite") return 55;
+            return 0;
+        }
+
+        function renderSummary() {
+            if (!data.selectedPackage) {
+                summaryEl.innerHTML = "<p>Missing rental data. Please restart your order from the rental page.</p>";
+                paymentButton.disabled = true;
+                paymentButton.classList.add("disabled");
+                return;
+            }
+
+            const monthlyPrice = getMonthlyPrice(data.selectedPackage);
+            const todayTotal = monthlyPrice + (data.deliveryFee || 0);
+
+            const address = [
+                data.address?.line1,
+                data.address?.line2,
+                data.address?.town,
+                data.address?.county,
+                data.address?.postcode
+            ].filter(Boolean).join(", ");
+
+            summaryEl.innerHTML = `
+                <p><strong>Package:</strong> ${data.selectedPackage.toUpperCase()}</p>
+                <p><strong>Monthly rental:</strong> £${monthlyPrice} / month</p>
+                <p><strong>Delivery fee (one-off):</strong> £${data.deliveryFee || 0}</p>
+                <hr>
+                <p><strong>You’ll pay today:</strong> <strong>£${todayTotal}</strong></p>
+                <p style="font-size:13px; color:var(--color-text-muted); margin-top:4px;">
+                    £${monthlyPrice} / month will then be charged every month until you cancel, plus a one-off delivery fee today.
+                </p>
+                <hr>
+                <p><strong>Delivery date:</strong> ${data.selectedDate}</p>
+                <p><strong>Time window:</strong> ${data.deliveryTime}</p>
+                <hr>
+                <p><strong>Name:</strong> ${data.fullName}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone:</strong> ${data.phone || "(Not provided)"}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Newsletter opt-in:</strong> ${data.newsletterOptIn ? "Yes" : "No"}</p>
+            `;
+        }
+
+        renderSummary();
+
+        /* -------------------------------------------------- */
+        /* PAYMENT REDIRECT (STRIPE PLACEHOLDER) */
+        /* -------------------------------------------------- */
+
+        paymentButton.addEventListener("click", () => {
+            alert("Stripe Checkout would launch here.");
+        });
+    </script>
+
+</body>
+
+</html>

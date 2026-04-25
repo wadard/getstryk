@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rent Your Strength Setup — GetStryk</title>
+
+  <!-- GLOBAL + RENT CSS -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="rent.css">
+
+  <!-- MATERIAL SYMBOLS (CHECKBOX + TOGGLE ICONS) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body>
+
+  <!-- MAIN NAV -->
+  <header class="header">
+    <div class="container header-inner">
+
+      <!-- LOGO LINKS TO HOME -->
+      <div class="logo" onclick="window.location.href='index.html'" style="cursor:pointer;">
+        STRYK
+        <img src="images/stryksymbol.png" class="logo-symbol" alt="Stryk Symbol">
+      </div>
+
+      <nav class="nav">
+        <a href="sell.html" class="nav-sell">Sell Your Equipment</a>
+        <span class="nav-divider">|</span>
+        <a href="index.html#equipment">Equipment</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#delivery">Delivery</a>
+        <span class="nav-divider">|</span>
+
+        <!-- ORDER NOW BUTTON (HIDDEN ON RENT PAGE VIA JS) -->
+        <a href="rent.html?package=pro" class="nav-cta">Order Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- STICKY STEPS -->
+  <div class="sticky-steps">
+    <div class="rent-steps">
+      <a href="#step1" class="step-link"><div class="step" id="step1nav">1. Choose Package</div></a>
+      <a href="#step2" class="step-link"><div class="step" id="step2nav">2. Delivery Location</div></a>
+      <a href="#step3" class="step-link"><div class="step" id="step3nav">3. Delivery Date</div></a>
+      <a href="#step4" class="step-link"><div class="step" id="step4nav">4. Your Details</div></a>
+      <a href="#step5" class="step-link"><div class="step" id="step5nav">5. Confirm</div></a>
+    </div>
+    <div class="rent-progress">
+      <div class="rent-progress-bar" id="rentProgressBar"></div>
+    </div>
+  </div>
+
+  <!-- RENT PAGE -->
+  <section class="rent-page">
+    <div class="container">
+
+      <!-- STEP 1 -->
+      <section id="step1" class="rent-section">
+        <div class="rent-card" id="card-step1">
+          <div class="rent-card-header">
+            <h2>Choose Your Package</h2>
+            <span class="step-number" data-step="1">1.</span>
+          </div>
+
+          <p class="rent-intro">
+            Select the setup that matches your training. All packages include delivery and collection.
+            <strong>Minimum term: 1 month. If cancelled within 6 months, a £45 collection fee applies.</strong>
+          </p>
+
+          <div class="rent-packages-row">
+
+            <!-- STARTER -->
+            <div class="rent-package-card" data-package="starter">
+              <span class="material-symbols-outlined package-toggle">toggle_off</span>
+              <h3>Strength Starter</h3>
+              <p class="rent-price">£35 / month</p>
+              <p class="rent-tagline">
+                Bench + half rack package for lifters who already own their own barbell and plates.
+              </p>
+              <ul class="rent-list">
+                <li><strong>Bench:</strong> Adjustable flat/incline bench</li>
+                <li><strong>Rack:</strong> Half squat rack with safety bars</li>
+                <li><strong>Barbell:</strong> Not included</li>
+                <li><strong>Plates:</strong> Not included</li>
+                <li><strong>Setup service:</strong> Not included</li>
+                <li><strong>Space needed:</strong> 3m x 3m</li>
+              </ul>
+            </div>
+
+            <!-- PRO -->
+            <div class="rent-package-card" data-package="pro">
+              <span class="material-symbols-outlined package-toggle">toggle_off</span>
+              <h3>Strength Pro</h3>
+              <p class="rent-price">£45 / month</p>
+              <p class="rent-tagline">
+                Bench, half rack, Olympic barbell and 100kg plate set — delivered for you to position and assemble.
+              </p>
+              <ul class="rent-list">
+                <li><strong>Bench:</strong> Adjustable flat/incline bench</li>
+                <li><strong>Rack:</strong> Half squat rack with safety bars</li>
+                <li><strong>Barbell:</strong> 20kg Olympic bar</li>
+                <li><strong>Plates:</strong> 100kg Olympic plate set</li>
+                <li><strong>Setup service:</strong> Not included</li>
+                <li><strong>Space needed:</strong> 3m x 3m</li>
+              </ul>
+            </div>
+
+            <!-- ELITE -->
+            <div class="rent-package-card" data-package="elite">
+              <span class="material-symbols-outlined package-toggle">toggle_off</span>
+              <h3>Strength Elite</h3>
+              <p class="rent-price">£55 / month</p>
+              <p class="rent-tagline">
+                Complete barbell package with setup assistance and a structured strength programme delivered by email.
+              </p>
+              <ul class="rent-list">
+                <li><strong>Bench:</strong> Adjustable flat/incline bench</li>
+                <li><strong>Rack:</strong> Half squat rack with safety bars</li>
+                <li><strong>Barbell:</strong> 20kg Olympic bar</li>
+                <li><strong>Plates:</strong> 100kg Olympic plate set</li>
+                <li><strong>Setup service:</strong> Included</li>
+                <li><strong>Coaching:</strong> Strength programme via email</li>
+                <li><strong>Space needed:</strong> 3m x 3m</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section id="step2" class="rent-section">
+        <div class="rent-card" id="card-step2">
+          <div class="rent-card-header">
+            <h2>Where Are We Delivering To?</h2>
+            <span class="step-number" data-step="2">2.</span>
+          </div>
+
+          <p class="rent-intro">
+            Enter your postcode. We’ll confirm delivery availability and apply the correct delivery rate.
+          </p>
+
+          <div class="autocomplete-wrapper">
+            <input
+              type="text"
+              id="addressSearch"
+              class="autocomplete-input"
+              placeholder="Enter your postcode (e.g., LS29 8RD)"
+              autocomplete="off"
+            >
+            <div id="addressSuggestionsWrapper" class="autocomplete-suggestions hidden">
+              <ul id="addressSuggestions"></ul>
+            </div>
+          </div>
+
+          <p id="postcodeMessage" class="postcode-result"></p>
+
+          <button id="manualAddressLink" type="button" class="manual-link">
+            Enter address manually
+          </button>
+
+          <div id="manualAddressWrapper" class="manual-address-wrapper hidden">
+            <div class="rent-field">
+              <label>House Number / Name</label>
+              <input type="text" id="addressLine1">
+            </div>
+
+            <div class="rent-field">
+              <label>Street Name</label>
+              <input type="text" id="addressLine2">
+            </div>
+
+            <div class="rent-field">
+              <label>Town / City</label>
+              <input type="text" id="town">
+            </div>
+
+            <div class="rent-field">
+              <label>County (optional)</label>
+              <input type="text" id="county">
+            </div>
+
+            <div class="rent-field">
+              <label>Postcode</label>
+              <input type="text" id="fullPostcode">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section id="step3" class="rent-section">
+        <div class="rent-card" id="card-step3">
+          <div class="rent-card-header">
+            <h2>Choose Delivery Date</h2>
+            <span class="step-number" data-step="3">3.</span>
+          </div>
+
+          <p class="rent-intro">
+            We deliver every weekend. Choose one of the next available delivery dates below.
+          </p>
+
+          <div id="deliveryOptions" class="delivery-options"></div>
+
+          <div class="rent-field">
+            <label>Preferred Time Window</label>
+            <select id="deliveryTime">
+              <option value="">Anytime</option>
+              <option>9am – 1pm</option>
+              <option>2pm – 7pm</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section id="step4" class="rent-section">
+        <div class="rent-card" id="card-step4">
+          <div class="rent-card-header">
+            <h2>Your Details</h2>
+            <span class="step-number" data-step="4">4.</span>
+          </div>
+
+          <div class="rent-field">
+            <label>Full Name</label>
+            <input type="text" id="fullName">
+          </div>
+
+          <div class="rent-field">
+            <label>Email</label>
+            <input type="email" id="email">
+          </div>
+
+          <div class="rent-field">
+            <label>Phone (optional)</label>
+            <input type="text" id="phone">
+          </div>
+
+          <!-- NEWSLETTER OPT-IN -->
+          <div class="rent-field newsletter-field">
+            <span class="material-symbols-outlined newsletter-icon" id="newsletterIcon">
+              check_box_outline_blank
+            </span>
+            <label class="newsletter-label">Subscribe to training updates & offers</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 5 -->
+      <section id="step5" class="rent-section">
+        <div class="rent-card" id="card-step5">
+          <div class="rent-card-header">
+            <h2>Confirm Your Rental</h2>
+            <span class="step-number" data-step="5">5.</span>
+          </div>
+      
+          <p id="incompleteWarning" class="incomplete-warning hidden">
+            Please complete all required details before confirming.
+          </p>
+      
+          <div id="summaryBox" class="summary-box"></div>
+      
+          <!-- LEGAL CHECKBOXES -->
+          <div class="legal-checks">
+      
+            <!-- TERMS -->
+            <div class="legal-check" data-check="terms">
+              <span class="material-symbols-outlined legal-icon">check_box_outline_blank</span>
+              <p>
+                I agree to the
+                <a href="terms.html" target="_blank">GetStryk Terms &amp; Conditions</a>.
+              </p>
+            </div>
+      
+            <!-- SAFETY + LIABILITY + EARLY FEE -->
+            <div class="legal-check" data-check="safety">
+              <span class="material-symbols-outlined legal-icon">check_box_outline_blank</span>
+              <p>
+                I understand I am responsible for safe use, supervision, and keeping equipment away from children and pets.
+                I accept liability for damage, loss, or theft, and acknowledge that cancelling within 6 months incurs a £45
+                collection fee.
+              </p>
+            </div>
+      
+          </div>
+      
+          <button class="rent-checkout-btn disabled" id="confirmButton" disabled>
+            Review &amp; Confirm
+          </button>
+        </div>
+      </section>
+
+  <script type="module" src="rent.js"></script>
+</body>
+</html>

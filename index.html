@@ -5,21 +5,238 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GetStryk — Your Home Gym, Delivered</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- MATERIAL SYMBOLS (GOOGLE ICONS) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
+
 <body>
 
-  <header class="hero">
-    <h1>Your Home Gym, Delivered.</h1>
-    <p>Premium strength and cardio equipment delivered to your door — rented monthly, set up for you, and collected when you're done.</p>
-    <a href="#equipment" class="cta">View Equipment</a>
+  <!-- TOP BANNER (REDUCED PADDING) -->
+  <div class="top-banner">
+    <p>FREE Delivery across West Yorkshire</p>
+    <div class="banner-icon">
+      <img src="images/truck.png" alt="Delivery Truck">
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">
+        STRYK
+        <img src="images/stryksymbol.png" class="logo-symbol" alt="Stryk Symbol">
+      </div>
+
+      <nav class="nav">
+        <a href="sell.html" class="nav-sell">Sell Your Equipment</a>
+        <span class="nav-divider">|</span>
+        <a href="#equipment">Equipment</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#delivery">Delivery</a>
+        <span class="nav-divider">|</span>
+        <a href="rent.html?package=pro" class="nav-cta">Order Now</a>
+      </nav>
+    </div>
   </header>
 
-  <section id="equipment" class="product">
-    <h2>MiraFit Bench + Squat Rack + Olympic Bar + Plates</h2>
-    <p class="price">From £45/month</p>
-    <p class="desc">A complete strength setup delivered to your home. Includes adjustable bench, squat rack, 20kg Olympic bar, and 100kg plate set.</p>
-    <a href="#" class="cta">Rent This Setup</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <h1>Your Home Gym, Delivered.</h1>
+      <p class="subhead">
+        Premium strength equipment delivered to your door — rented monthly, delivered to you, and collected when you're done.
+      </p>
+      <a href="#equipment" class="cta">View Equipment</a>
+    </div>
   </section>
+
+  <!-- VALUE -->
+  <section class="value">
+    <div class="container value-grid">
+
+      <div class="value-item">
+        <img src="images/premium-equipment.png" class="value-icon">
+        <h3>Premium Equipment</h3>
+        <p>Commercial‑grade strength gear chosen for performance, durability, and safety.</p>
+      </div>
+
+      <div class="value-item">
+        <img src="images/fast-delivery.png" class="value-icon">
+        <h3>Scheduled Delivery</h3>
+        <p>Delivered to your home at a time that suits you — no hassle, no heavy lifting.</p>
+      </div>
+
+      <div class="value-item">
+        <img src="images/flexible-rentals.png" class="value-icon">
+        <h3>Flexible Rentals</h3>
+        <p>Rent monthly with no long term commitment. Cancel anytime after 1 month.</p>
+      </div>
+
+      <div class="value-item">
+        <img src="images/collection-included.png" class="value-icon">
+        <h3>Collection Included</h3>
+        <p>When you're done, we collect everything. Simple, clean, convenient.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRODUCT (ALL CONTENT INSIDE CARD) -->
+  <section id="equipment" class="product product-bg">
+    <div class="product-overlay"></div>
+
+    <div class="container">
+
+      <div class="product-card product-card-full">
+
+        <div class="product-showcase">
+          <img src="images/setup-bench-rack.jpg" alt="Bench and Rack Setup">
+          <img src="images/setup-bar-plates.jpg" alt="Barbell and Plates Setup">
+        </div>
+
+        <h2>MiraFit Strength Setup</h2>
+        <p class="product-sub">Bench • Squat Rack • Olympic Bar • Plates • Olympic Bar Clips</p>
+
+        <p class="price">£45 / month</p>
+
+        <p class="desc">
+          A complete strength training setup delivered to your home. Includes adjustable bench, squat rack, 20kg Olympic bar, 100kg plate set, and Olympic bar clips.
+        </p>
+
+        <a href="rent.html?package=pro" class="cta">Rent This Setup</a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="pricing">
+    <div class="container">
+      <h2>Simple, Transparent Pricing</h2>
+
+      <div class="pricing-grid">
+        <a href="rent.html?package=starter" class="pricing-card-link">
+          <div class="pricing-card">
+            <h3>Strength Starter</h3>
+            <p class="price">£35 / month</p>
+            <ul>
+              <li>Bench</li>
+              <li>Squat Rack</li>
+              <li>Free Delivery</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="rent.html?package=pro" class="pricing-card-link">
+          <div class="pricing-card featured">
+            <h3>Strength Pro</h3>
+            <p class="price">£45 / month</p>
+            <ul>
+              <li>Bench</li>
+              <li>Squat Rack</li>
+              <li>Olympic Bar</li>
+              <li>100kg Plate Set</li>
+              <li>Free Delivery</li>
+            </ul>
+          </div>
+        </a>
+
+        <a href="rent.html?package=elite" class="pricing-card-link">
+          <div class="pricing-card">
+            <h3>Strength Elite</h3>
+            <p class="price">£55 / month</p>
+            <ul>
+              <li>Bench</li>
+              <li>Squat Rack</li>
+              <li>Olympic Bar</li>
+              <li>100kg Plate Set</li>
+              <li>Free Delivery</li>
+              <li>Setup Included</li>
+              <li>Progressive Training Emails</li>
+            </ul>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DELIVERY -->
+  <section id="delivery" class="delivery">
+    <div class="container">
+      <h2>Delivery & Collection Made Simple</h2>
+      <p class="subhead">
+        We deliver every weekend. Choose a date that works for you during checkout — we handle the heavy lifting.
+      </p>
+
+      <div class="postcode-checker">
+        <h3>Check Your Postcode</h3>
+      </div>
+
+      <div class="postcode-row">
+        <input type="text" id="postcodeInputHome" placeholder="Enter your postcode (e.g. LS18)">
+        <button onclick="checkPostcodeHome()">Check</button>
+      </div>
+
+      <p id="postcodeResultHome" class="postcode-result"></p>
+
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9483.96996983663!2d-1.655!3d53.837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487be1a3f5b0b0d7%3A0x123456789abcdef!2sHorsforth!5e0!3m2!1sen!2suk!4v1700000000000"
+          loading="lazy"></iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER (WITH ICONS + REDUCED PADDING) -->
+  <footer class="footer">
+    <div class="container footer-inner">
+
+      <div class="footer-col">
+        <p class="footer-title">GetStryk</p>
+        <p class="footer-line">
+          <span class="material-symbols-outlined footer-icon">location_on</span>
+          Leeds, UK
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-title">Support</p>
+        <p class="footer-line">
+          <span class="material-symbols-outlined footer-icon">mail</span>
+          <a href="mailto:hello@getstryk.co.uk">hello@getstryk.co.uk</a>
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-title">Legal</p>
+        <p>© 2026 GetStryk</p>
+        <p>All rights reserved</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- POSTCODE CHECKER SCRIPT -->
+  <script>
+    function checkPostcodeHome() {
+      const input = document.getElementById("postcodeInputHome").value.trim().toUpperCase();
+      const result = document.getElementById("postcodeResultHome");
+
+      if (!input) {
+        result.textContent = "Enter any UK postcode to check availability.";
+        result.style.color = "#00E5FF";
+        return;
+      }
+
+      result.textContent = "We deliver to most UK postcodes. Final delivery fee is confirmed during checkout.";
+      result.style.color = "#00E5FF";
+    }
+  </script>
 
 </body>
 </html>
