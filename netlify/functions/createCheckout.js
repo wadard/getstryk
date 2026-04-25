@@ -2,14 +2,15 @@ const Stripe = require("stripe");
 
 exports.handler = async (event) => {
     try {
-        // Parse incoming data
-        const data = JSON.parse(event.body);
+        // Parse incoming request body
+        const data = JSON.parse(event.body || "{}");
 
         const selectedPackage = data.selectedPackage;
         const deliveryFee = data.deliveryFee;
         const customerName = data.customerName;
         const customerEmail = data.customerEmail;
 
+        // Validate required fields
         if (!selectedPackage) {
             return {
                 statusCode: 400,
@@ -17,10 +18,10 @@ exports.handler = async (event) => {
             };
         }
 
-        // Stripe init
+        // Initialise Stripe
         const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-        // Map package → price ID
+        // Map package names to Stripe price IDs
         const priceMap = {
             starter: process.env.STARTER_PRICE_ID,
             pro: process.env.PRO_PRICE_ID,
@@ -44,7 +45,7 @@ exports.handler = async (event) => {
             }
         ];
 
-        // Add delivery fee if applicable
+        // Add delivery fee if selected
         if (deliveryFee === true || deliveryFee === "true") {
             if (!process.env.DELIVERY_FEE_PRICE_ID) {
                 return {
