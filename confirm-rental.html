@@ -41,7 +41,7 @@
 
             <div class="rent-card" style="margin-top:40px;">
 
-                <!-- BACK LINK (correct placement + hover) -->
+                <!-- BACK LINK -->
                 <p class="go-back-link" onclick="window.location.href='rent.html#step5'">
                     ← Back to details
                 </p>
@@ -63,7 +63,7 @@
                     Proceed to secure payment
                 </button>
 
-                <!-- TERMS NOTE (subtle, grey, left-aligned) -->
+                <!-- TERMS NOTE -->
                 <p class="terms-note">
                     You agreed to the GetStryk Terms &amp; Conditions and rental responsibilities on the previous step.
                 </p>
@@ -140,11 +140,35 @@
         renderSummary();
 
         /* -------------------------------------------------- */
-        /* PAYMENT REDIRECT (STRIPE PLACEHOLDER) */
+        /* REAL STRIPE CHECKOUT REDIRECT */
         /* -------------------------------------------------- */
 
-        paymentButton.addEventListener("click", () => {
-            alert("Stripe Checkout would launch here.");
+        paymentButton.addEventListener("click", async () => {
+            paymentButton.disabled = true;
+            paymentButton.innerText = "Redirecting...";
+
+            try {
+                const response = await fetch("/.netlify/functions/createCheckout", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.url) {
+                    window.location.href = result.url; // Redirect to Stripe Checkout
+                } else {
+                    alert("Unable to start payment. Please try again.");
+                    paymentButton.disabled = false;
+                    paymentButton.innerText = "Proceed to secure payment";
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Something went wrong. Please try again.");
+                paymentButton.disabled = false;
+                paymentButton.innerText = "Proceed to secure payment";
+            }
         });
     </script>
 
