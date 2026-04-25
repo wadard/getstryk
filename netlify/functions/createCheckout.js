@@ -1,28 +1,58 @@
-import Stripe from "stripe";
+const Stripe = require("stripe");
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-export async function handler(event) {
+exports.handler = async (event) => {
     try {
+        // Parse incoming data
         const data = JSON.parse(event.body);
 
-        // Map package names to Stripe price IDs
+        const selectedPackage = data.selectedPackage;
+        const deliveryFee = data.deliveryFee;
+        const customerName = data.customerName;
+        const customerEmail = data.customerEmail;
+
+        if (!selectedPackage) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: "Missing selectedPackage" })
+            };
+        }
+
+        // Stripe init
+        const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+        // Map package → price ID
         const priceMap = {
             starter: process.env.STARTER_PRICE_ID,
             pro: process.env.PRO_PRICE_ID,
             elite: process.env.ELITE_PRICE_ID
         };
 
+        const packagePriceId = priceMap[selectedPackage];
+
+        if (!packagePriceId) {
+            return {
+                statusCode: 400,
+                body: JSON.stringify({ error: "Invalid package selected" })
+            };
+        }
+
         // Build line items
         const lineItems = [
             {
-                price: priceMap[data.selectedPackage],
+                price: packagePriceId,
                 quantity: 1
             }
         ];
 
-        // Add delivery fee if needed
-        if (data.deliveryFee > 0) {
+        // Add delivery fee if applicable
+        if (deliveryFee === true || deliveryFee === "true") {
+            if (!process.env.DELIVERY_FEE_PRICE_ID) {
+                return {
+                    statusCode: 500,
+                    body: JSON.stringify({ error: "Delivery fee price ID missing" })
+                };
+            }
+
             lineItems.push({
                 price: process.env.DELIVERY_FEE_PRICE_ID,
                 quantity: 1
@@ -34,17 +64,14 @@ export async function handler(event) {
             mode: "subscription",
             payment_method_types: ["card"],
             line_items: lineItems,
-            success_url: "https://getstryk.co.uk/success.html",
-            cancel_url: "https://getstryk.co.uk/rent.html#step5",
+            customer_email: customerEmail || undefined,
             metadata: {
-                fullName: data.fullName,
-                email: data.email,
-                phone: data.phone,
-                address: JSON.stringify(data.address),
-                deliveryDate: data.selectedDate,
-                deliveryTime: data.deliveryTime,
-                newsletterOptIn: data.newsletterOptIn
-            }
+                customerName: customerName || "",
+                selectedPackage,
+                deliveryFee: deliveryFee ? "yes" : "no"
+            },
+            success_url: "https://getstryk.co.uk/success.html",
+            cancel_url: "https://getstryk.co.uk/confirm-rental.html"
         });
 
         return {
@@ -53,9 +80,14 @@ export async function handler(event) {
         };
 
     } catch (err) {
+        console.error("Checkout error:", err);
+
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: err.message })
+            body: JSON.stringify({
+                error: "Internal server error",
+                details: err.message
+            })
         };
     }
-}
+};
