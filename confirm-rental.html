@@ -73,12 +73,21 @@
         </div>
     </section>
 
-    <!-- HIDDEN NETLIFY FORM -->
+    <!-- ⭐ HIDDEN NETLIFY FORM (FULL CUSTOMER DETAILS) -->
     <form name="rental-intent" netlify netlify-honeypot="bot-field" hidden>
         <input type="text" name="customerName" />
         <input type="email" name="customerEmail" />
+        <input type="text" name="phone" />
         <input type="text" name="selectedPackage" />
         <input type="text" name="deliveryFee" />
+        <input type="text" name="deliveryDate" />
+        <input type="text" name="deliveryTime" />
+        <input type="text" name="addressLine1" />
+        <input type="text" name="addressLine2" />
+        <input type="text" name="town" />
+        <input type="text" name="county" />
+        <input type="text" name="postcode" />
+        <input type="text" name="newsletterOptIn" />
     </form>
 
     <!-- FOOTER -->
@@ -156,20 +165,34 @@
             paymentButton.innerText = "Redirecting...";
 
             try {
-                /* 1. Submit Netlify form */
+                /* ⭐ 1. Submit Netlify form with ALL customer details */
                 const formData = new FormData();
                 formData.append("form-name", "rental-intent");
+
                 formData.append("customerName", data.fullName);
                 formData.append("customerEmail", data.email);
+                formData.append("phone", data.phone || "");
+
                 formData.append("selectedPackage", data.selectedPackage);
                 formData.append("deliveryFee", data.deliveryFee);
+
+                formData.append("deliveryDate", data.selectedDate);
+                formData.append("deliveryTime", data.deliveryTime);
+
+                formData.append("addressLine1", data.address?.line1 || "");
+                formData.append("addressLine2", data.address?.line2 || "");
+                formData.append("town", data.address?.town || "");
+                formData.append("county", data.address?.county || "");
+                formData.append("postcode", data.address?.postcode || "");
+
+                formData.append("newsletterOptIn", data.newsletterOptIn ? "Yes" : "No");
 
                 await fetch("/", {
                     method: "POST",
                     body: formData
                 });
 
-                /* 2. Call Stripe Checkout function */
+                /* ⭐ 2. Call Stripe Checkout function */
                 const response = await fetch("/.netlify/functions/createCheckout", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
