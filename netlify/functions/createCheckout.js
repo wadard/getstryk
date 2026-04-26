@@ -45,8 +45,9 @@ exports.handler = async (event) => {
             }
         ];
 
-        // Add delivery fee if selected
-        if (deliveryFee === true || deliveryFee === "true") {
+        // ⭐ FIXED DELIVERY FEE LOGIC ⭐
+        // Add delivery fee if it's a number > 0
+        if (Number(deliveryFee) > 0) {
             if (!process.env.DELIVERY_FEE_PRICE_ID) {
                 return {
                     statusCode: 500,
