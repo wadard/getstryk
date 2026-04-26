@@ -12,9 +12,7 @@ exports.handler = async (event) => {
             address
         } = data;
 
-        // -----------------------------
         // 1. VALIDATE REQUIRED FIELDS
-        ------------------------------
         if (!selectedPackage) {
             return {
                 statusCode: 400,
@@ -43,10 +41,8 @@ exports.handler = async (event) => {
             };
         }
 
-        // -----------------------------
         // 2. UK MAINLAND ONLY CHECK
-        ------------------------------
-        const postcode = address.postcode.toUpperCase().trim();
+        const postcode = String(address.postcode).toUpperCase().trim();
         const blockedPrefixes = ["BT", "GY", "JE", "IM"];
 
         if (blockedPrefixes.some(prefix => postcode.startsWith(prefix))) {
@@ -58,9 +54,7 @@ exports.handler = async (event) => {
             };
         }
 
-        // -----------------------------
         // 3. INITIALISE STRIPE
-        ------------------------------
         const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
         const priceMap = {
@@ -78,9 +72,7 @@ exports.handler = async (event) => {
             };
         }
 
-        // -----------------------------
         // 4. BUILD LINE ITEMS
-        ------------------------------
         const lineItems = [
             {
                 price: packagePriceId,
@@ -88,7 +80,6 @@ exports.handler = async (event) => {
             }
         ];
 
-        // Delivery fee logic
         if (Number(deliveryFee) > 0) {
             if (!process.env.DELIVERY_FEE_PRICE_ID) {
                 return {
@@ -103,9 +94,7 @@ exports.handler = async (event) => {
             });
         }
 
-        // -----------------------------
         // 5. CREATE CHECKOUT SESSION
-        ------------------------------
         const session = await stripe.checkout.sessions.create({
             mode: "subscription",
             payment_method_types: ["card"],
