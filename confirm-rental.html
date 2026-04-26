@@ -73,6 +73,14 @@
         </div>
     </section>
 
+    <!-- HIDDEN NETLIFY FORM -->
+    <form name="rental-intent" netlify netlify-honeypot="bot-field" hidden>
+        <input type="text" name="customerName" />
+        <input type="email" name="customerEmail" />
+        <input type="text" name="selectedPackage" />
+        <input type="text" name="deliveryFee" />
+    </form>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container footer-inner">
@@ -140,7 +148,7 @@
         renderSummary();
 
         /* -------------------------------------------------- */
-        /* REAL STRIPE CHECKOUT REDIRECT */
+        /* NETLIFY FORM SUBMISSION + STRIPE CHECKOUT */
         /* -------------------------------------------------- */
 
         paymentButton.addEventListener("click", async () => {
@@ -148,6 +156,20 @@
             paymentButton.innerText = "Redirecting...";
 
             try {
+                /* 1. Submit Netlify form */
+                const formData = new FormData();
+                formData.append("form-name", "rental-intent");
+                formData.append("customerName", data.fullName);
+                formData.append("customerEmail", data.email);
+                formData.append("selectedPackage", data.selectedPackage);
+                formData.append("deliveryFee", data.deliveryFee);
+
+                await fetch("/", {
+                    method: "POST",
+                    body: formData
+                });
+
+                /* 2. Call Stripe Checkout function */
                 const response = await fetch("/.netlify/functions/createCheckout", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -157,7 +179,7 @@
                 const result = await response.json();
 
                 if (result.url) {
-                    window.location.href = result.url; // Redirect to Stripe Checkout
+                    window.location.href = result.url;
                 } else {
                     alert("Unable to start payment. Please try again.");
                     paymentButton.disabled = false;
